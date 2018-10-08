@@ -28,6 +28,7 @@ body, .app {
 
 .bookshelf {
   padding: 0 10px 20px;
+  min-height: 360px;
 }
 
 @media (min-width: 600px) {
@@ -135,11 +136,22 @@ body, .app {
 
 .book-top {
   position: relative;
-  height: 200px;
+  
   display: flex;
   align-items: flex-end;
 }
-
+.alert-book-status{
+  position: fixed;
+  left: 50px;
+  bottom: 50px;
+  background: black;
+  padding: 20px;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  box-shadow: 0 0 0 rgba(0,0,0, 0.4);
+  animation: pulse 2s infinite;
+}
 .book-shelf-changer {
   position: absolute;
   right: 0;
@@ -171,4 +183,31 @@ body, .app {
   padding: 20px 10px 0;
   text-align: center;
   font-size: 0.8em;
+}
+
+
+@-webkit-keyframes pulse {
+  0% {
+    -webkit-box-shadow: 0 0 0 0 rgba(0,0,0, 0.4);
+  }
+  70% {
+      -webkit-box-shadow: 0 0 0 10px rgba(0,0,0, 0);
+  }
+  100% {
+      -webkit-box-shadow: 0 0 0 0 rgba(0,0,0, 0);
+  }
+}
+@keyframes pulse {
+  0% {
+    -moz-box-shadow: 0 0 0 0 rgba(0,0,0, 0.4);
+    box-shadow: 0 0 0 0 rgba(0,0,0, 0.4);
+  }
+  70% {
+      -moz-box-shadow: 0 0 0 10px rgba(0,0,0, 0);
+      box-shadow: 0 0 0 10px rgba(0,0,0, 0);
+  }
+  100% {
+      -moz-box-shadow: 0 0 0 0 rgba(0,0,0, 0);
+      box-shadow: 0 0 0 0 rgba(0,0,0, 0);
+  }
 }
