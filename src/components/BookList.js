@@ -2,6 +2,8 @@ import React, { Component } from "react";
 
 import { Link } from "react-router-dom";
 import Bookshelf from "./Bookshelf";
+
+//main div to display the home page of the myreads app
 class BookList extends Component {
   render() {
     const { books, onUpdatebook } = this.props;

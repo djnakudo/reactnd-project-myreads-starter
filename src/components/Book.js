@@ -4,12 +4,14 @@ import * as BooksAPI from "../BooksAPI";
 import { Animated } from "react-animated-css";
 import SelectBook from "./SelectBook";
 import { Link } from "react-router-dom";
-
+//book compoment - this is showed in booklist and search views
 class Book extends Component {
+  //shelf is a state of the current shelf from the book and visibility to manipulate animation effects
   state = {
     shelf: "none",
     visibility: true
   };
+  //calls for the updateBook api and set the state of the shelf
   updateBook = async value => {
     await BooksAPI.update(this.props.book, value);
     let newbook = JSON.parse(JSON.stringify(this.props.book));
@@ -20,7 +22,8 @@ class Book extends Component {
 
     return newbook;
   };
-
+//since the search api does not returns the shelf of a book, a call to a get method from the bookapi is needed
+// to get the shelf status
   getbook = async () => {
     let result = await BooksAPI.get(this.props.book.id);
     if (this._getBook)
@@ -28,15 +31,17 @@ class Book extends Component {
         shelf: result.shelf
       });
   };
+  //drag start method to pass the book data as an object for a shelf ondrop method
   dragStart = (e, book) => {
     e.dataTransfer.setData("text/plain", JSON.stringify(book));
     e.dataTransfer.effectAllowed = "copy";
   };
+  //this._getbook is implemented since BookAPI methods  are an async tasks, to not throw errors of call stack limit exceed
   componentDidMount() {
     this._getBook = true;
     this.getbook();
   }
-
+//when the component will unmount all the async previous not finished tasks, are successfully ended
   componentWillUnmount() {
     this._getBook = false;
   }

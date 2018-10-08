@@ -13,6 +13,7 @@ class BooksApp extends React.Component {
     msgstatus: "",
     alert: true
   };
+  //alert timeout function to display a shelf status changing call
   timerAlert = setTimeout(() => {
     this.setState({ alert: true });
   }, 4000);
@@ -23,7 +24,9 @@ class BooksApp extends React.Component {
       alert: false,
       books:
         book.shelf === "none"
+        //if the status is none the book will be in no other shelf 
           ? prevState.books.filter(item => item.id !== book.id)
+          //change the book shelf
           : [book, ...prevState.books.filter(item => item.id !== book.id)]
     }));
     this.timerAlert = setTimeout(() => {
@@ -33,6 +36,7 @@ class BooksApp extends React.Component {
   changeQuery = query => {
     this.setState({ currentQuery: query });
   };
+  //generate the innerHTML of the alert based on the new shelf status of a given Book by its name
   generateShelfChangingStatus = (shelf, name) => {
     switch (shelf) {
       case "none":
@@ -65,6 +69,7 @@ class BooksApp extends React.Component {
         return `404`;
     }
   };
+  //API call to show all the classified books in some shelf
   getAllBooks = () => {
     BooksAPI.getAll().then(result => {
       this.setState(() => ({
@@ -101,11 +106,14 @@ class BooksApp extends React.Component {
           render={props => (
             <BookDetails
               bookID={props.match.params.id}
+              //props are passed in to get in the bookDetails component
+              //the previous path and in the back button to go back to this route endpoint
               {...props}
               onUpdatebook={this.updateBook}
             />
           )}
         />
+        
         <div className="alert-book-status " hidden={this.state.alert}>
           {this.state.msgstatus}
         </div>

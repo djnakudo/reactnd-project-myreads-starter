@@ -2,11 +2,15 @@ import React, { PureComponent } from "react";
 import propTypes from "prop-types";
 import Book from "./Book";
 import * as BooksAPI from "../BooksAPI";
+
+//component that will contain a given shelf to show the books from the API
 class Bookshelf extends PureComponent {
   static propTypes = {
     books: propTypes.array.isRequired
   };
+  //function to handle updates of drag/drop updating way of a given book
   onDrop = async (e, shelf) => {
+    //this will get a object data from on drag event ended from a Book component
     let book = JSON.parse(e.dataTransfer.getData("text/plain"));
     if (book.shelf !== shelf) {
       await BooksAPI.update(book, shelf);

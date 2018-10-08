@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import * as BooksAPI from "../BooksAPI";
 import SelectBook from "./SelectBook";
-
+//Component to show details of a given book by its id passed in the route
 class BookDetails extends Component {
   state = {
     book: null,
     shelf: "none"
   };
+  //method to update the book in the API context
   updateBook = async value => {
     await BooksAPI.update(this.state.book, value);
     let newbook = JSON.parse(JSON.stringify(this.state.book));
@@ -17,6 +18,7 @@ class BookDetails extends Component {
 
     return newbook;
   };
+  //first call when the component is mounted
   componentDidMount() {
     BooksAPI.get(this.props.bookID).then(book => {
       this.setState({
@@ -28,6 +30,7 @@ class BookDetails extends Component {
 
   render() {
     const { onUpdatebook } = this.props;
+    // to not display an div with no content, its displayed a test div to simulate an loader aspect until the api call is completed
     let divrendered = <div>Loading</div>;
     if (this.state.book)
       divrendered = (
@@ -35,6 +38,7 @@ class BookDetails extends Component {
           <nav className="bg-dark-green white bb b--light-gray dt ">
             <div
               className="dtc v-mid tc mr2 close-search "
+              //this will go back to the previous route that called the present one
               onClick={() => this.props.history.goBack()}
             >
               Close
