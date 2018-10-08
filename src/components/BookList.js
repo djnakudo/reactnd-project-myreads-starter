@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Bookshelf from "./Bookshelf";
 class BookList extends Component {
   render() {
-    const { books, RerenderShelfs } = this.props;
+    const { books, onUpdatebook } = this.props;
     return (
       <div className="list-books">
         <div className="list-books-title">
@@ -14,17 +14,20 @@ class BookList extends Component {
           <div>
             <Bookshelf
               title="Currently Reading"
-              RerenderShelfs={RerenderShelfs}
+              shelftype="currentlyReading"
+              rerenderBook={onUpdatebook}
               books={books.filter(book => book.shelf === "currentlyReading")}
             />
             <Bookshelf
               title="Want to Read"
-              RerenderShelfs={RerenderShelfs}
+              shelftype="wantToRead"
+              rerenderBook={onUpdatebook}
               books={books.filter(book => book.shelf === "wantToRead")}
             />
             <Bookshelf
               title="Read"
-              RerenderShelfs={RerenderShelfs}
+              shelftype="read"
+              rerenderBook={onUpdatebook}
               books={books.filter(book => book.shelf === "read")}
             />
           </div>

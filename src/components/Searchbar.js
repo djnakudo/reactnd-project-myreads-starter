@@ -3,12 +3,11 @@ import Bookshelf from "./Bookshelf";
 import { Link } from "react-router-dom";
 import * as BooksAPI from "../BooksAPI";
 import { isArray } from "util";
-
+import _ from "lodash";
 import { isObject } from "util";
 class Searchbar extends Component {
   state = {
-    books: [],
-    allBooks: []
+    queriedBooks: []
   };
 
   updateQuery = query => {
@@ -18,26 +17,25 @@ class Searchbar extends Component {
         : isObject(result)
           ? "noData"
           : "init";
-
+      this.props.onChangeQuery(query);
       this.setState(() => ({
-        books: queryParsedResult
+        queriedBooks: queryParsedResult
       }));
     });
   };
+  componentDidMount() {
+    document.querySelector(
+      ".search-books-input-wrapper input"
+    ).value = this.props.query;
+    this.updateQuery(this.props.query);
+  }
   render() {
-    const { books } = this.state;
+    const { queriedBooks } = this.state;
 
     return (
       <div className="search-books">
         <div className="search-books-bar">
-          <Link
-            to="/"
-            className="close-search"
-            onClick={() => {
-              console.log("clicked");
-              this.props.onRedirectToMain();
-            }}
-          >
+          <Link to="/" className="close-search">
             Close
           </Link>
 
@@ -50,8 +48,20 @@ class Searchbar extends Component {
           </div>
         </div>
         <div className="search-books-results">
-          {isArray(books) && <Bookshelf books={books} />}
-          {books === "noData" && <p>No Books Found</p>}
+          {isArray(queriedBooks) && (
+            <Bookshelf
+              books={[
+                ..._.orderBy(
+                  queriedBooks.filter(book => !isNaN(book.averageRating)),
+                  ["averageRating", "title"],
+                  ["desc", "asc"]
+                ),
+                ...queriedBooks.filter(book => isNaN(book.averageRating))
+              ]}
+              rerenderBook={this.props.onUpdatebook}
+            />
+          )}
+          {queriedBooks === "noData" && <p>No Books Found</p>}
         </div>
       </div>
     );
