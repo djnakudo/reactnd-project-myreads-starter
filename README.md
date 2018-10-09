@@ -2,13 +2,13 @@
 
 This is the project assignment 'MyReads' for the  Udacity's React Fundamentals course.
 
-This project used the [React Starter template] (https://github.com/udacity/reactnd-project-myreads-starter)
+This project used the [React Starter template](https://github.com/udacity/reactnd-project-myreads-starter)
 to develop an React application to display a couple of Books from a virtual library and let the user be able to select which book his/her are currently reading, want to read and read.
 
 
 
 ## Installation
-It is required that you have already installed [npm] (https://www.npmjs.com/get-npm).
+It is required that you have already installed [npm](https://www.npmjs.com/get-npm).
 
 
 To install the project use any terminal interface to run these commands :
@@ -39,7 +39,7 @@ To install the project use any terminal interface to run these commands :
 
 ```
 
-Others ommited files are similar or very equal to the main [repo] (https://github.com/udacity/reactnd-project-myreads-starter)
+Others ommited files are similar or very equal to the main [repo](https://github.com/udacity/reactnd-project-myreads-starter)
 
 ## Dependencies
 
