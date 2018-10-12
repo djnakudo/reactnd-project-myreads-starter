@@ -29,6 +29,7 @@ const BookList = ({ books, onUpdatebook }) => {
         <div>
           {shelfs.map(data => (
             <Bookshelf
+              key={data.shelftype}
               title={data.title}
               shelftype={data.shelftype}
               rerenderBook={onUpdatebook}

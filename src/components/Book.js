@@ -1,11 +1,11 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import * as BooksAPI from "../BooksAPI";
 
 import { Animated } from "react-animated-css";
 import SelectBook from "./SelectBook";
 import { Link } from "react-router-dom";
 //book compoment - this is showed in booklist and search views
-class Book extends Component {
+class Book extends PureComponent {
   //shelf is a state of the current shelf from the book and visibility to manipulate animation effects
   state = {
     shelf: "none",

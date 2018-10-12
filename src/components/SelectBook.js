@@ -40,7 +40,7 @@ const SelectBook = ({ shelf, updateBook, rerenderBook }) => {
           Move to...
         </option>
         {shelfs.map(shelf => (
-          <option value={shelf.shelftype}>{shelf.title}</option>
+          <option key={shelf.shelftype} value={shelf.shelftype}>{shelf.title}</option>
         ))}
       </select>
     </div>

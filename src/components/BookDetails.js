@@ -1,8 +1,8 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import * as BooksAPI from "../BooksAPI";
 import SelectBook from "./SelectBook";
 //Component to show details of a given book by its id passed in the route
-class BookDetails extends Component {
+class BookDetails extends PureComponent {
   state = {
     book: null,
     shelf: "none"

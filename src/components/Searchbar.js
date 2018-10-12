@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Bookshelf from "./Bookshelf";
 import { Link } from "react-router-dom";
 import * as BooksAPI from "../BooksAPI";
-import { isArray } from "util";
+import { isArray} from "util";
 import _ from "lodash";
 import { isObject } from "util";
 
@@ -15,6 +15,7 @@ class Searchbar extends Component {
   };
   //function to call the api search function and update the state from the component
   updateQuery = query => {
+  
     BooksAPI.search(query).then(result => {
       //handle errors, if the api returned books(array), normal update
       //otherwise it cannot found any books (noData) or the initial state as an empty input value(init)
@@ -52,7 +53,10 @@ class Searchbar extends Component {
             <input
               type="text"
               placeholder="Search by title or author"
-              onInput={e => this.updateQuery(e.target.value)}
+              onInput={(e) =>  {
+                let debounced=_.debounce(this.updateQuery,200)
+                debounced(e.target.value)
+              }}
             />
           </div>
         </div>
